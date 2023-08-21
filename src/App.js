@@ -12,6 +12,11 @@ function App() {
   ]);
   let [따봉, 따봉변경] = useState(0);
 
+  function orderTitle() {
+    const newArray = [...글제목배열];
+    글제목배열변경(newArray.sort());
+  }
+
   function 제목변경(text, i) {
     //글제목배열변경[i] = '여자';
     const newArray = [...글제목배열]; // 기존 배열 복사
@@ -27,6 +32,9 @@ function App() {
           블로그임
         </h4>
       </div>
+      <div>
+        <button onClick={() => orderTitle()}>제목순</button>
+      </div>
       {글제목배열.map((text, i) => (
         <div className="list">
           <h4>
@@ -36,20 +44,24 @@ function App() {
           <p>2월 17일 발행</p>
         </div>
       ))}
-      {/* <div className="list">
-        <h4>{글제목배열[0]}</h4>//인덱싱
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{글제목배열[1]}</h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{글제목배열[2]}</h4>
-        <p>2월 17일 발행</p>
-      </div> */}
+
+      <Modal />
     </div>
   );
 }
+
+function Modal(params) {
+  return (
+    <>
+      <div className="modal">
+        <h4>제목</h4>
+        <p>날짜</p>
+        <p>상세내용</p>
+      </div>
+    </>
+  );
+}
+
+const Modal2 = () => {};
 
 export default App;

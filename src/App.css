@@ -8,6 +8,12 @@
 div {
   box-sizing: border-box;
 }
+.modal {
+  margin-top: 20px;
+  padding: 20px;
+  background: #cbed9c;
+  text-align: left;
+}
 .list {
   text-align: left;
   padding-left: 20px;
