@@ -11,6 +11,7 @@ function App() {
     '인기 상품',
   ]);
   let [따봉, 따봉변경] = useState(0);
+  let [modalState, setModalState] = useState(false);
 
   function orderTitle() {
     const newArray = [...글제목배열];
@@ -37,7 +38,11 @@ function App() {
       </div>
       {글제목배열.map((text, i) => (
         <div className="list">
-          <h4>
+          <h4
+            onClick={() => {
+              setModalState(!modalState);
+            }}
+          >
             <span onClick={() => 제목변경(text, i)}>{text} </span>
             <span onClick={() => 따봉변경(따봉 + 1)}>🖤👍</span> {따봉}
           </h4>
@@ -45,7 +50,7 @@ function App() {
         </div>
       ))}
 
-      <Modal />
+      {modalState === true ? <Modal /> : null}
     </div>
   );
 }
