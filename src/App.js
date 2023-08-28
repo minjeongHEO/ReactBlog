@@ -10,7 +10,7 @@ function App() {
     '간절기 아이템',
     '인기 상품',
   ]);
-  let [따봉, 따봉변경] = useState(0);
+  let [따봉, 따봉변경] = useState([0, 0, 0, 0]);
   let [modalState, setModalState] = useState(false);
 
   function orderTitle() {
@@ -44,7 +44,16 @@ function App() {
             }}
           >
             <span onClick={() => 제목변경(text, i)}>{text} </span>
-            <span onClick={() => 따봉변경(따봉 + 1)}>🖤👍</span> {따봉}
+            <span
+              onClick={() => {
+                const newArray = [...따봉];
+                newArray[i] = 따봉[i] + 1;
+                따봉변경(newArray);
+              }}
+            >
+              🖤👍
+            </span>
+            {따봉[i]}
           </h4>
           <p>2월 17일 발행</p>
         </div>
@@ -59,8 +68,8 @@ function Modal(params) {
   return (
     <>
       <div className="modal">
-        <h4>제목</h4>
-        <p>날짜</p>
+        <h4>제목</h4> <span></span>
+        <p>날짜</p> <span></span>
         <p>상세내용</p>
       </div>
     </>
