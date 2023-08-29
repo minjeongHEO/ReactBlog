@@ -21,7 +21,7 @@ function App() {
   function 제목변경(text, i) {
     //글제목배열변경[i] = '여자';
     const newArray = [...글제목배열]; // 기존 배열 복사
-    newArray[i] = '읽은 포스팅'; // 원하는 변경 값 할당
+    newArray[i] = text; //'읽은 포스팅'; // 원하는 변경 값 할당
     글제목배열변경(newArray); // 상태 변경 함수 호출
   }
   //a. state에 보관한 자료
@@ -43,7 +43,7 @@ function App() {
               setModalState(!modalState);
             }}
           >
-            <span onClick={() => 제목변경(text, i)}>{text} </span>
+            <span onClick={() => 제목변경('읽음)', i)}>{text} </span>
             <span
               onClick={() => {
                 const newArray = [...따봉];
@@ -59,18 +59,25 @@ function App() {
         </div>
       ))}
 
-      {modalState === true ? <Modal /> : null}
+      {modalState === true ? <Modal 글제목배열={글제목배열} 제목변경={제목변경} /> : null}
     </div>
   );
 }
 
-function Modal(params) {
+function Modal(props) {
   return (
     <>
       <div className="modal">
-        <h4>제목</h4> <span></span>
+        <h4>{props.글제목배열[0]}</h4> <span></span>
         <p>날짜</p> <span></span>
         <p>상세내용</p>
+        <button
+          onClick={() => {
+            props.제목변경('여자코트추천', 0);
+          }}
+        >
+          글수정
+        </button>
       </div>
     </>
   );
