@@ -1,4 +1,5 @@
 /* eslint-disable */
+/**자식이 부모의 state 가져다쓰고 싶을 때는 props : 강의 들었음 */
 import { useState } from 'react';
 import './App.css';
 
@@ -12,6 +13,7 @@ function App() {
   ]);
   let [따봉, 따봉변경] = useState([0, 0, 0, 0]);
   let [modalState, setModalState] = useState(false);
+  let [index, setIndex] = useState(0);
 
   function orderTitle() {
     const newArray = [...글제목배열];
@@ -40,10 +42,11 @@ function App() {
         <div className="list">
           <h4
             onClick={() => {
+              setIndex(i);
               setModalState(!modalState);
             }}
           >
-            <span onClick={() => 제목변경('읽음)', i)}>{text} </span>
+            <span onClick={() => 제목변경(text, i)}>{text} </span>
             <span
               onClick={() => {
                 const newArray = [...따봉];
@@ -59,7 +62,9 @@ function App() {
         </div>
       ))}
 
-      {modalState === true ? <Modal 글제목배열={글제목배열} 제목변경={제목변경} /> : null}
+      {modalState === true ? (
+        <Modal 글제목배열={글제목배열} 제목변경={제목변경} index={index} />
+      ) : null}
     </div>
   );
 }
@@ -68,12 +73,13 @@ function Modal(props) {
   return (
     <>
       <div className="modal">
-        <h4>{props.글제목배열[0]}</h4> <span></span>
+        <h4>{props.글제목배열[props.index]}</h4> <span></span>
         <p>날짜</p> <span></span>
         <p>상세내용</p>
         <button
           onClick={() => {
-            props.제목변경('여자코트추천', 0);
+            props.제목변경('수정', props.index);
+            //props.제목변경(props.글제목배열[props.index] + '- 변경됨', props.index); ?? 왜추가 계속 되는거지?
           }}
         >
           글수정
